@@ -22,6 +22,7 @@ class Window(QMainWindow):
     def __init__(self):
         super(Window, self).__init__()
 
+        self.path_to_get_origin = os.path.abspath("origin")
         self.path_to_save = ""
         self.list_file = []
         self.list_file_path = []
@@ -52,31 +53,16 @@ class Window(QMainWindow):
         self.label_pts.move(self.x_coord, 0)
         self.label_pts.adjustSize()
 
-        self.button_add_file_1 = QtWidgets.QPushButton(self)
-        self.button_add_file_1.setFont(self.font_in_label)
-        self.button_add_file_1.setText("Добавить первый файл")
-        self.button_add_file_1.setGeometry(
+        self.button_check_file = QtWidgets.QPushButton(self)
+        self.button_check_file.setFont(self.font_in_label)
+        self.button_check_file.setText("Добавить первый файл")
+        self.button_check_file.setGeometry(
             100, 70, self.button_size_x, int(self.button_size_y))
 
-        self.button_add_file_2 = QtWidgets.QPushButton(self)
-        self.button_add_file_2.setFont(self.font_in_label)
-        self.button_add_file_2.setText("Добавить второй файл")
-        self.button_add_file_2.setGeometry(
-            900 - self.button_size_x, 70, self.button_size_x, int(self.button_size_y))
+        self.button_check_file.clicked.connect(self.check_file)
 
-        self.label_show_file_1 = QLabel(self)
-        self.label_line_file_1 = QLineEdit(self)
-        self.label_line_file_1.setGeometry(100, 150, self.button_size_x, 25)
-
-        self.label_show_file_2 = QLabel(self)
-        self.label_line_file_2 = QLineEdit(self)
-        self.label_line_file_2.setGeometry(
-            900 - self.button_size_x, 150, self.button_size_x, 25)
-
-        self.button_add_file_1.clicked.connect(self.set_file)
-
-    def set_file(self) -> None:
-        pass
+    def check_file(self) -> None:
+        self.list_of_file
 
 
 def application():
