@@ -6,6 +6,7 @@ from PyPDF2 import PdfMerger
 
 import sys
 import os
+import help_defenition as hd
 
 
 class Window(QMainWindow):
@@ -98,11 +99,12 @@ class Window(QMainWindow):
     def check_file(self) -> None:
         self.list_file = os.listdir("origin")
         str_list_file = "Файлы для объединения:\n\n"
-        if not len(self.list_file) == 0:
+        if len(self.list_file) != 0 and hd.search_pdf_in_list(self.list_file) == True:
             i = 1
             for elem in self.list_file:
-                str_list_file += f"{i}) {elem}\n"
-                i += 1
+                if str(elem)[-4:].find("pdf") != -1:
+                    str_list_file += f"{i}) {elem}\n"
+                    i += 1
             str_list_file += "\n\n!!  Внимание! В каком порядке здесь расположены файлы  !!\n!!  В таком же они и будут в итоговом  !!"
             self.label_list_file.setText(f"{str_list_file}")
             self.file_was_checked = True
@@ -111,7 +113,7 @@ class Window(QMainWindow):
             self.button_repeat.setStyleSheet(
                 f"background: rgb(0, 255, 127); {self.border_style}")
         else:
-            str_list_file += "Папка \"origin\" пустая("
+            str_list_file += "Папка с файлами пустая("
             self.label_list_file.setText(f"{str_list_file}")
         self.label_list_file.adjustSize()
 
